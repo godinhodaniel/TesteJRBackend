@@ -3,6 +3,7 @@ using apiToDo.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 
 namespace apiToDo.Controllers
 {
@@ -10,19 +11,17 @@ namespace apiToDo.Controllers
     [Route("[controller]")]
     public class TarefasController : ControllerBase
     {
-        [Authorize]
-        [HttpPost("lstTarefas")]
+        [HttpGet("lstTarefas")]
         public ActionResult lstTarefas()
         {
             try
             {
-              
-                return StatusCode(200);
+                var tarefas = new Tarefas().lstTarefas();
+                return StatusCode(200, tarefas);
             }
-
             catch (Exception ex)
             {
-                return StatusCode(400, new { msg = $"Ocorreu um erro em sua API {ex.Message}"});
+                return StatusCode(400, new { msg = $"Ocorreu um erro em sua API {ex.Message}" });
             }
         }
 
@@ -31,29 +30,42 @@ namespace apiToDo.Controllers
         {
             try
             {
+                var tarefas = new Tarefas();
+                tarefas.InserirTarefa(Request);
 
-                return StatusCode(200);
-
-
+                return StatusCode(200, tarefas.lstTarefas()); // Retorna a lista de tarefas com status 200
             }
-
             catch (Exception ex)
             {
                 return StatusCode(400, new { msg = $"Ocorreu um erro em sua API {ex.Message}" });
             }
         }
 
-        [HttpGet("DeletarTarefa")]
+        [HttpDelete("DeletarTarefa")]
         public ActionResult DeleteTask([FromQuery] int ID_TAREFA)
         {
-            try
+            try //catch para erros do bloco de codigos abaixo
             {
+                var tarefas = new Tarefas(); //nova instancia da classe para acessar metodos
 
-                return StatusCode(200);
+                // Verificando se a tarefa com o ID_TAREFA existe
+                var tarefaExistente = tarefas.lstTarefas().FirstOrDefault(t => t.ID_TAREFA == ID_TAREFA);
+
+                if (tarefaExistente == null) //se não há tarefas com ID informado
+                {
+                    // Se a tarefa não for encontrada, retorna um erro 404 (Not Found)
+                    return StatusCode(404, new { msg = $"A tarefa com o ID {ID_TAREFA} não foi encontrada." });
+                }
+
+                // método para deletar a tarefa com o ID fornecido
+                tarefas.DeletarTarefa(ID_TAREFA);
+
+                // se houver sucesso retorna 200 (ok), com a lista atualizada de tarefas
+                return StatusCode(200, tarefas.lstTarefas());
             }
-
-            catch (Exception ex)
+            catch (Exception ex) // caso aconteça alguma Exception durante o processo
             {
+                // mensagem de erro se houver Exception
                 return StatusCode(400, new { msg = $"Ocorreu um erro em sua API {ex.Message}" });
             }
         }

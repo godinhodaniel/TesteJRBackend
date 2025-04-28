@@ -58,7 +58,8 @@
               "RelativeToolTip": "apiToDo\\Startup.cs",
               "ViewState": "AgIAACMAAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-28T18:14:22.09Z"
+              "WhenOpened": "2025-04-28T18:14:22.09Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -70,7 +71,8 @@
               "RelativeToolTip": "apiToDo\\Program.cs",
               "ViewState": "AgIAAA0AAAAAAAAAAAA1wAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-28T18:14:18.487Z"
+              "WhenOpened": "2025-04-28T18:14:18.487Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -80,7 +82,7 @@
               "RelativeDocumentMoniker": "apiToDo\\Controllers\\TarefasController.cs",
               "ToolTip": "C:\\Users\\danielpg\\source\\repos\\TesteJRBackend\\apiToDo\\Controllers\\TarefasController.cs",
               "RelativeToolTip": "apiToDo\\Controllers\\TarefasController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAADIAAAAAAAAAAAAwwEMAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-28T17:57:59.372Z",
               "EditorCaption": ""
@@ -95,7 +97,8 @@
               "RelativeToolTip": "apiToDo\\Models\\Tarefas.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAA0AAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-28T17:57:59.701Z"
+              "WhenOpened": "2025-04-28T17:57:59.701Z",
+              "EditorCaption": ""
             }
           ]
         }
