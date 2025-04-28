@@ -7,63 +7,55 @@ namespace apiToDo.Models
 {
     public class Tarefas
     {
+        // Lista de tarefas persistente para toda a vida útil da aplicação
+        private static List<TarefaDTO> _lstTarefas = new List<TarefaDTO>
+        {
+            new TarefaDTO { ID_TAREFA = 1, DS_TAREFA = "Fazer Compras" },
+            new TarefaDTO { ID_TAREFA = 2, DS_TAREFA = "Fazer Atividades Faculdade" },
+            new TarefaDTO { ID_TAREFA = 3, DS_TAREFA = "Subir Projeto de Teste no GitHub" }
+        };
+
+        // Retorna a lista de tarefas
         public List<TarefaDTO> lstTarefas()
         {
-            try
-            {
-                List<TarefaDTO> lstTarefas = new List<TarefaDTO>();
-
-                lstTarefas.Add(new TarefaDTO
-                {
-                    ID_TAREFA = 1,
-                    DS_TAREFA = "Fazer Compras"
-                });
-
-                lstTarefas.Add(new TarefaDTO
-                {
-                    ID_TAREFA = 2,
-                    DS_TAREFA = "Fazer Atividad Faculdade"
-                });
-
-                lstTarefas.Add(new TarefaDTO
-                {
-                    ID_TAREFA = 3,
-                    DS_TAREFA = "Subir Projeto de Teste no GitHub"
-                });
-
-                return new List<TarefaDTO>();
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
+            return _lstTarefas; // Retorna a lista persistente
         }
 
-
-        public void InserirTarefa(TarefaDTO Request)
+        // Método para adicionar uma tarefa
+        public void InserirTarefa(TarefaDTO request)
         {
             try
             {
-                List<TarefaDTO> lstResponse = lstTarefas();
-                lstResponse.Add(Request);
+                // Adiciona a nova tarefa à lista persistente
+                _lstTarefas.Add(request);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"Erro ao inserir tarefa: {ex.Message}");
             }
         }
+
+        // Método para deletar uma tarefa com base no ID
         public void DeletarTarefa(int ID_TAREFA)
         {
             try
             {
-                List<TarefaDTO> lstResponse = lstTarefas();
-                var Tarefa = lstResponse.FirstOrDefault(x => x.ID_TAREFA == ID_TAREFA);
-                TarefaDTO Tarefa2 = lstResponse.Where(x=> x.ID_TAREFA == Tarefa.ID_TAREFA).FirstOrDefault();
-                lstResponse.Remove(Tarefa2);
+                // Encontra a tarefa pela ID
+                var tarefa = _lstTarefas.FirstOrDefault(x => x.ID_TAREFA == ID_TAREFA);
+
+                if (tarefa != null)
+                {
+                    // Remove a tarefa da lista
+                    _lstTarefas.Remove(tarefa);
+                }
+                else
+                {
+                    throw new Exception("Tarefa não encontrada.");
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"Erro ao deletar tarefa: {ex.Message}");
             }
         }
     }
