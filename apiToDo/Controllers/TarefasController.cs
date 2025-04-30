@@ -1,6 +1,5 @@
 ﻿using apiToDo.DTO;
 using apiToDo.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -11,63 +10,98 @@ namespace apiToDo.Controllers
     [Route("[controller]")]
     public class TarefasController : ControllerBase
     {
+        private readonly Tarefas _tarefas;
+
+        public TarefasController()
+        {
+            _tarefas = new Tarefas();
+        }
+
         [HttpGet("lstTarefas")]
-        public ActionResult lstTarefas()
+        public ActionResult ListarTarefas()
         {
             try
             {
-                var tarefas = new Tarefas().lstTarefas();
-                return StatusCode(200, tarefas);
+                var lista = _tarefas.lstTarefas();
+                return Ok(lista); // Status 200 com a lista
             }
             catch (Exception ex)
             {
-                return StatusCode(400, new { msg = $"Ocorreu um erro em sua API {ex.Message}" });
+                return BadRequest(new { msg = $"Erro ao listar tarefas: {ex.Message}" });
+            }
+        }
+
+        // Bônus - Buscar tarefa por ID
+        [HttpGet("lstTarefasPorID")]
+        public ActionResult BuscarTarefaPorId([FromQuery] int ID_TAREFA)
+        {
+            try
+            {
+                var tarefa = _tarefas.BuscarTarefaPorId(ID_TAREFA);
+                return Ok(tarefa);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new { msg = $"Erro ao buscar tarefa: {ex.Message}" });
             }
         }
 
         [HttpPost("InserirTarefas")]
-        public ActionResult InserirTarefas([FromBody] TarefaDTO Request)
+        public ActionResult InserirTarefas([FromBody] TarefaDTO request)
         {
             try
             {
-                var tarefas = new Tarefas();
-                tarefas.InserirTarefa(Request);
-
-                return StatusCode(200, tarefas.lstTarefas()); // Retorna a lista de tarefas com status 200
+                _tarefas.InserirTarefa(request);
+                return Ok(_tarefas.lstTarefas()); // Status 200 com lista atualizada
             }
             catch (Exception ex)
             {
-                return StatusCode(400, new { msg = $"Ocorreu um erro em sua API {ex.Message}" });
+                return BadRequest(new { msg = $"Erro ao inserir tarefa: {ex.Message}" });
             }
         }
 
-        [HttpDelete("DeletarTarefa")]
-        public ActionResult DeleteTask([FromQuery] int ID_TAREFA)
+        [HttpDelete("DeleteTask")]
+        public ActionResult DeletarTarefa([FromQuery] int ID_TAREFA)
         {
-            try //catch para erros do bloco de codigos abaixo
+            try
             {
-                var tarefas = new Tarefas(); //nova instancia da classe para acessar metodos
+                // Busca a tarefa para verificar se ela existe
+                var tarefaExistente = _tarefas.lstTarefas().FirstOrDefault(t => t.ID_TAREFA == ID_TAREFA);
 
-                // Verificando se a tarefa com o ID_TAREFA existe
-                var tarefaExistente = tarefas.lstTarefas().FirstOrDefault(t => t.ID_TAREFA == ID_TAREFA);
-
-                if (tarefaExistente == null) //se não há tarefas com ID informado
+                // Se a tarefa não for encontrada
+                if (tarefaExistente == null)
                 {
-                    // Se a tarefa não for encontrada, retorna um erro 404 (Not Found)
-                    return StatusCode(404, new { msg = $"A tarefa com o ID {ID_TAREFA} não foi encontrada." });
+                    // Retorna erro 404 - tarefa não encontrada
+                    return NotFound(new { msg = $"Tarefa com o ID {ID_TAREFA} não encontrada." });
                 }
 
-                // método para deletar a tarefa com o ID fornecido
-                tarefas.DeletarTarefa(ID_TAREFA);
+                // Remove a tarefa da lista
+                _tarefas.DeletarTarefa(ID_TAREFA);
 
-                // se houver sucesso retorna 200 (ok), com a lista atualizada de tarefas
-                return StatusCode(200, tarefas.lstTarefas());
+                // Retorna a lista atualizada
+                return Ok(_tarefas.lstTarefas());
             }
-            catch (Exception ex) // caso aconteça alguma Exception durante o processo
+            catch (Exception ex)
             {
-                // mensagem de erro se houver Exception
-                return StatusCode(400, new { msg = $"Ocorreu um erro em sua API {ex.Message}" });
+                // Retorna erro 400 com mensagem de erro
+                return BadRequest(new { msg = $"Erro ao deletar tarefa: {ex.Message}" });
             }
         }
+
+        // Bônus - Atualizar tarefa
+        [HttpPut("AtualizarTarefa")]
+        public ActionResult AtualizarTarefa([FromBody] TarefaDTO request)
+        {
+            try
+            {
+                _tarefas.AtualizarTarefa(request);
+                return Ok(_tarefas.lstTarefas());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { msg = $"Erro ao atualizar tarefa: {ex.Message}" });
+            }
+        }
+
     }
 }

@@ -1,4 +1,63 @@
-.vs\apiToDo\FileContentIndex
+# Arquivos e pastas do Visual Studio
 .vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build Results
 bin/
 obj/
+out/
+
+# Logs
+*.log
+
+# Arquivos gerados pelo sistema
+*.DS_Store
+Thumbs.db
+
+# Configurações locais
+*.local
+*.env
+
+# Arquivos de pacotes
+*.nupkg
+*.snupkg
+
+# Diretórios de pacotes
+packages/
+!packages/build/
+!packages/repositories.config
+
+# Arquivos de lock
+project.lock.json
+project.fragment.lock.json
+
+# Arquivos de cache
+*.ide.cache
+
+# Arquivos temporários
+*.tmp
+*.temp
+
+# Arquivos de publicação
+publish/
+wwwroot/
+
+# Arquivos de teste
+TestResults/
+*.coverage
+*.coveragexml
+*.trx
+
+# Arquivos de backup
+*.bak
+*.swp
+*.orig
+*.rej
+
+# Arquivos gerados pelo Rider/JetBrains
+.idea/
+*.iml
