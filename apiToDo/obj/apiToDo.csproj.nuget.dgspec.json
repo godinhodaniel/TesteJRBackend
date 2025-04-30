@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dan\\source\\repos\\TesteJRBackend\\apiToDo\\apiToDo.csproj": {}
+    "C:\\Users\\danielpg\\Downloads\\vs\\apiToDo\\apiToDo.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dan\\source\\repos\\TesteJRBackend\\apiToDo\\apiToDo.csproj": {
+    "C:\\Users\\danielpg\\Downloads\\vs\\apiToDo\\apiToDo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dan\\source\\repos\\TesteJRBackend\\apiToDo\\apiToDo.csproj",
+        "projectUniqueName": "C:\\Users\\danielpg\\Downloads\\vs\\apiToDo\\apiToDo.csproj",
         "projectName": "apiToDo",
-        "projectPath": "C:\\Users\\dan\\source\\repos\\TesteJRBackend\\apiToDo\\apiToDo.csproj",
-        "packagesPath": "C:\\Users\\dan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dan\\source\\repos\\TesteJRBackend\\apiToDo\\obj\\",
+        "projectPath": "C:\\Users\\danielpg\\Downloads\\vs\\apiToDo\\apiToDo.csproj",
+        "packagesPath": "C:\\Users\\danielpg\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\danielpg\\Downloads\\vs\\apiToDo\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "E:\\VSSDK\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\dan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\danielpg\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
